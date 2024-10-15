@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Campgrounds</title>
-  </head>
-  <body>
+<% layout('./layouts/boilerplate') %>
     <h1>All Campgrounds</h1>
-    <a href="/campgrounds/create">Create new Campground</a>
+    <a href="/campgrounds/create" class="btn btn-primary mb-5">Create new Campground</a>
     <ul>
       <% campgrounds.forEach(element => { %>
-      <a href=<%= `/campgrounds/show/${element._id}` %>><li><%= element.title %></li></a>
+        <li>
+          <img src="<%= element.image %>" alt="">
+          <h3><%= element.title %></h3>
+          <h5><%= element.description %></h5>
+          <h5><%= element.location %></h5>
+          <a href=<%= `/campgrounds/show/${element._id}` %> class="btn btn-info mb-2">View <%= element.title %></a>
+        </li>
       <% }); %>
     </ul>
-  </body>
-</html>

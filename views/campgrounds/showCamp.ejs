@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<% layout('./layouts/boilerplate') %>
+    <img src="<%= campground.image %>" alt="">
     <h1><%= campground.title %></h1>
-    <h2><%= campground.location %></h2>
-    <a href= <%= `/campgrounds/edit/${campground._id}`%>>Edit This Camp</a>
-    <br>
-    <a href= <%= `/campgrounds/delete/${campground._id}`%>>Delete This Camp</a>
-    <br>
-    <a href="/campgrounds">Show All Campgrounds</a>
-</body>
-</html>
+    <h1><%= campground.description %></h1>
+    <h1><%= campground.location %></h1>
+    <h1>&#8377; <%= campground.price %> / night</h1>
+    <% if (campground.reviews.length) {%>
+        <h1>Reviews</h1>
+        <ul>
+        <% campground.reviews.forEach(element => {%>
+            <li><%= element.review %></li>
+            <a href="/campgrounds/<%= campground._id %>/review/delete/<%= element._id %>" class="btn btn-danger btn-sm mb-1">Delete this review</a>
+        <%}); %>
+        </ul>
+    <% }else{%>
+        <h2 class="text-muted">No Reviews yet!!</h2>
+        <% } %>
+    <a href= <%= `/campgrounds/edit/${campground._id}`%> class="btn btn-success">Edit This Camp</a>
+    <a href= <%= `/campgrounds/delete/${campground._id}`%> class="btn btn-danger">Delete This Camp</a>
+    <a href="/campgrounds/<%= campground._id %>/review/add" class="btn btn-info">Add a review</a>
+    <a href="/campgrounds" class="btn btn-primary">Show All Campgrounds</a>

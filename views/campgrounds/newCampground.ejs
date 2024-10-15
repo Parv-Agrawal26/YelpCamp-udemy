@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
+<% layout('./layouts/boilerplate') %>
     <h1>Create a new Campground</h1>
     <form action="/campgrounds/create" method="post">
         <input type="text" name="title" placeholder="Enter title" required>
         <input type="text" name="location" placeholder="Enter location" required>
-        <input type="submit" value="Submit">
+        <input type="text" name="description" placeholder="Enter description" required>
+        <input type="text" name="image" placeholder="Give image url" required>
+        <input type="number" name="price" placeholder="Give price" required>
+        <input type="submit" value="Submit" class="btn btn-success">
     </form>
-  </body>
-</html>
+
