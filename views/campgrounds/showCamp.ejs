@@ -9,13 +9,17 @@
         <ul>
         <% campground.reviews.forEach(element => {%>
             <li><%= element.review %></li>
+            <% if(logged._id.equals(element.userid)){ %>
             <a href="/campgrounds/<%= campground._id %>/review/delete/<%= element._id %>" class="btn btn-danger btn-sm mb-1">Delete this review</a>
-        <%}); %>
+                <% } %>
+            <%}); %>
         </ul>
     <% }else{%>
         <h2 class="text-muted">No Reviews yet!!</h2>
         <% } %>
-    <a href= <%= `/campgrounds/edit/${campground._id}`%> class="btn btn-success">Edit This Camp</a>
-    <a href= <%= `/campgrounds/delete/${campground._id}`%> class="btn btn-danger">Delete This Camp</a>
+    <% if(logged._id.equals(campground.author._id)){ %>
+        <a href= <%= `/campgrounds/edit/${campground._id}`%> class="btn btn-success">Edit This Camp</a>
+        <a href= <%= `/campgrounds/delete/${campground._id}`%> class="btn btn-danger">Delete This Camp</a>
+    <% } %>
     <a href="/campgrounds/<%= campground._id %>/review/add" class="btn btn-info">Add a review</a>
     <a href="/campgrounds" class="btn btn-primary">Show All Campgrounds</a>

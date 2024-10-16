@@ -1,0 +1,4 @@
+<%- layout("./layouts/boilerplate") %>
+<h1>Welcome, <%= user.name %></h1>
+<h2><%= user.email %></h2>
+<a href="/user/logout/<%= user._id %>" class="btn btn-danger">Logout</a>
