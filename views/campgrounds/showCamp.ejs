@@ -1,25 +1,49 @@
 <% layout('./layouts/boilerplate') %>
-    <img src="<%= campground.image %>" alt="">
-    <h1><%= campground.title %></h1>
-    <h1><%= campground.description %></h1>
-    <h1><%= campground.location %></h1>
-    <h1>&#8377; <%= campground.price %> / night</h1>
-    <% if (campground.reviews.length) {%>
-        <h1>Reviews</h1>
-        <ul>
-        <% campground.reviews.forEach(element => {%>
-            <li><%= element.review %></li>
-            <% if(logged._id.equals(element.userid)){ %>
-            <a href="/campgrounds/<%= campground._id %>/review/delete/<%= element._id %>" class="btn btn-danger btn-sm mb-1">Delete this review</a>
-                <% } %>
-            <%}); %>
-        </ul>
-    <% }else{%>
-        <h2 class="text-muted">No Reviews yet!!</h2>
-        <% } %>
-    <% if(logged._id.equals(campground.author._id)){ %>
-        <a href= <%= `/campgrounds/edit/${campground._id}`%> class="btn btn-success">Edit This Camp</a>
-        <a href= <%= `/campgrounds/delete/${campground._id}`%> class="btn btn-danger">Delete This Camp</a>
-    <% } %>
-    <a href="/campgrounds/<%= campground._id %>/review/add" class="btn btn-info">Add a review</a>
-    <a href="/campgrounds" class="btn btn-primary">Show All Campgrounds</a>
+<div class="container mt-4">
+  <div class="row">
+    <!-- Campground Image -->
+    <div class="col-md-6">
+      <img src="<%= campground.image %>" class="img-fluid rounded mb-4" alt="<%= campground.title %>">
+    </div>
+
+    <!-- Campground Details -->
+    <div class="col-md-6">
+      <h1 class="display-4"><%= campground.title %></h1>
+      <p class="text-muted">Camp made by <strong><%= campground.author.name %></strong></p>
+      <p><strong>Description:</strong> <%= campground.description %></p>
+      <p><strong>Location:</strong> <%= campground.location %></p>
+      <h2 class="text-primary">&#8377; <%= campground.price %> / night</h2>
+
+      <!-- Buttons for editing/deleting -->
+      <% if(logged._id.equals(campground.author._id)){ %>
+        <div class="btn-group mb-4" role="group">
+          <a href="<%= `/campgrounds/edit/${campground._id}` %>" class="btn btn-success">Edit This Camp</a>
+          <a href="<%= `/campgrounds/delete/${campground._id}` %>" class="btn btn-danger">Delete This Camp</a>
+        </div>
+      <% } %>
+
+      <!-- Add a review -->
+      <a href="/campgrounds/<%= campground._id %>/review/add" class="btn btn-info mb-4">Add a review</a>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <% if (campground.reviews.length) { %>
+    <div class="mt-5">
+      <h3>Reviews</h3>
+      <ul class="list-group">
+        <% campground.reviews.forEach(element => { %>
+          <li class="list-group-item">
+            <p><%= element.review %></p>
+            <small class="text-muted">Reviewed by <%= element.userid.name %></small>
+            <% if(logged._id.equals(element.userid._id)){ %>
+              <a href="/campgrounds/<%= campground._id %>/review/delete/<%= element._id %>" class="btn btn-danger btn-sm float-right">Delete this review</a>
+            <% } %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } else { %>
+    <h4 class="text-muted mt-5">No Reviews yet!</h4>
+  <% } %>
+</div>

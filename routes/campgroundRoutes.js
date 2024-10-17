@@ -5,17 +5,23 @@ const reviewModel = require("../models/reviewModel");
 const reviewRoutes = require("../routes/reviewRoutes");
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const isAuthor = require("../middlewares/isAuthor")
+const isAuthor = require("../middlewares/isAuthor");
 
 router.get("/", async (req, res) => {
-  let campgrounds = await campgroundModel.find({});
+  let campgrounds = await campgroundModel.find({}).populate("author");
   res.render("./campgrounds/index", { campgrounds });
 });
 
 router.get("/show/:id", async (req, res) => {
   const campground = await campgroundModel
     .findById(req.params.id)
-    .populate("reviews")
+    .populate({
+      path: "reviews",
+      populate: {
+        path: "userid",
+        select: "name email",
+      },
+    })
     .populate("author");
   res.render("./campgrounds/showCamp", { campground });
 });
@@ -26,7 +32,7 @@ router.get("/create", (req, res) => {
 
 router.post("/create", async (req, res) => {
   let { title, location, price, image, description } = req.body;
-  const token = req.cookies.token
+  const token = req.cookies.token;
   const decoded = jwt.verify(token, process.env.JWT_KEY);
   const user = await userModel.findOne({ email: decoded.email });
   await campgroundModel.create({
@@ -35,12 +41,12 @@ router.post("/create", async (req, res) => {
     price: price,
     description: description,
     image: image,
-    author: user._id
+    author: user._id,
   });
   res.redirect("/campgrounds");
 });
 
-router.get("/edit/:id", isAuthor,async (req, res) => {
+router.get("/edit/:id", isAuthor, async (req, res) => {
   const campground = await campgroundModel.findById(req.params.id);
   res.render("./campgrounds/editCamp", { campground });
 });

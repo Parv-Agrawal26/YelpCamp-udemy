@@ -1,10 +1,33 @@
 <% layout('./layouts/boilerplate') %>
-    <h1>Edit this camp</h1>
-    <form action=<%= `/campgrounds/edit/${campground._id}`%> method="post">
-      <input type="text" name="title" value="<%= campground.title %>" />
-      <input type="text" name="location" value="<%= campground.location %>" />
-      <input type="text" name="description" value="<%= campground.description %>">
-      <input type="text" name="image" value="<%= campground.image %>">
-      <input type="number" name="price" value="<%= campground.price %>">
-      <input type="submit" value="Edit" class="btn btn-success"/>
-    </form>
+<div class="container mt-4">
+  <h1 class="mb-4">Edit this Campground</h1>
+  <form action="<%= `/campgrounds/edit/${campground._id}` %>" method="post">
+    
+    <div class="form-group mb-3">
+      <label for="title" class="form-label">Campground Title</label>
+      <input type="text" id="title" name="title" class="form-control" value="<%= campground.title %>" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input type="text" id="location" name="location" class="form-control" value="<%= campground.location %>" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" id="description" name="description" class="form-control" value="<%= campground.description %>" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="image" class="form-label">Image URL</label>
+      <input type="text" id="image" name="image" class="form-control" value="<%= campground.image %>" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="price" class="form-label">Price (in ₹)</label>
+      <input type="number" id="price" name="price" class="form-control" value="<%= campground.price %>" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Edit</button>
+  </form>
+</div>

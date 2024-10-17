@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
       });
       let token = await jwt.sign({ email: user.email }, process.env.JWT_KEY);
       res.cookie("token", token);
-      res.redirect(`profile/${user._id}`);
+      res.redirect("/");
     });
   }
 });
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
       if (result == true) {
         let token = await jwt.sign({ email: user.email }, process.env.JWT_KEY);
         res.cookie("token", token);
-        res.redirect(`profile/${user._id}`);
+        res.redirect("/");
       } else {
         res.redirect("/user/login");
       }

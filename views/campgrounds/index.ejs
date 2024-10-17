@@ -1,14 +1,21 @@
 <% layout('./layouts/boilerplate') %>
-    <h1>All Campgrounds</h1>
-    <a href="/campgrounds/create" class="btn btn-primary mb-5">Create new Campground</a>
-    <ul>
-      <% campgrounds.forEach(element => { %>
-        <li>
-          <img src="<%= element.image %>" alt="">
-          <h3><%= element.title %></h3>
-          <h5><%= element.description %></h5>
-          <h5><%= element.location %></h5>
-          <a href=<%= `/campgrounds/show/${element._id}` %> class="btn btn-info mb-2">View <%= element.title %></a>
-        </li>
-      <% }); %>
-    </ul>
+<h1 class="text-center my-4">All Campgrounds</h1>
+<div class="container">
+  <a href="/campgrounds/create" class="btn btn-primary mb-4">Create new Campground</a>
+  <div class="row">
+    <% campgrounds.forEach(element => { %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="<%= element.image %>" class="card-img-top" alt="Campground image">
+          <div class="card-body">
+            <h5 class="card-title"><%= element.title %></h5>
+            <p class="card-text"><%= element.description %></p>
+            <p class="card-text"><small class="text-muted"><%= element.location %></small></p>
+            <p class="card-text">Camp made by <strong><%= element.author.name %></strong></p>
+            <a href="<%= `/campgrounds/show/${element._id}` %>" class="btn btn-info">View <%= element.title %></a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</div>
