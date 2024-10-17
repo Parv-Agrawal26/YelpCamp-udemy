@@ -41,6 +41,10 @@ router.post("/create",upload.single('image'), async (req, res) => {
   const token = req.cookies.token;
   const decoded = jwt.verify(token, process.env.JWT_KEY);
   const user = await userModel.findOne({ email: decoded.email });
+  const response = await fetch(
+    `https://api.maptiler.com/geocoding/${location}.json?key=${process.env.MAPTILER_API_KEY}`
+  );
+  const data = await response.json();
   await campgroundModel.create({
     title: title,
     location: location,
@@ -48,6 +52,8 @@ router.post("/create",upload.single('image'), async (req, res) => {
     description: description,
     image: req.file.path,
     author: user._id,
+    long: data.features[0].geometry.coordinates[0],
+    lat: data.features[0].geometry.coordinates[1],
   });
   res.redirect("/campgrounds");
 });
