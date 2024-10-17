@@ -10,56 +10,61 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    
   </head>
   <body class="d-flex vh-100 flex-column">
     <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/campgrounds">YelpCamp</a>
-    
-    <!-- Toggle button for smaller screens -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/campgrounds">YelpCamp</a>
 
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a href="/" class="nav-link">Home</a>
-        </li>
-        
-        <% if(logged) { %>
-          <li class="nav-item">
-            <a href="/campgrounds/create" class="nav-link">Create a New Camp</a>
-          </li>
-          <li class="nav-item">
-            <a href="/user/profile/<%= logged._id %>" class="nav-link">Your Profile</a>
-          </li>
-          <li class="nav-item">
-            <a href="/user/logout/:id" class="nav-link">Logout</a>
-          </li>
-        <% } else { %>
-          <li class="nav-item">
-            <a href="/user/login" class="nav-link">Login</a>
-          </li>
-          <li class="nav-item">
-            <a href="/user/register" class="nav-link">Register</a>
-          </li>
-        <% } %>
-      </ul>
-    </div>
-  </div>
-</nav>
+        <!-- Toggle button for smaller screens -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <main class=""><%- body %></main>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+            </li>
+
+            <% if(logged) { %>
+            <li class="nav-item">
+              <a href="/campgrounds/create" class="nav-link"
+                >Create a New Camp</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="/user/profile/<%= logged._id %>" class="nav-link"
+                >Your Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="/user/logout/:id" class="nav-link text-danger">Logout</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a href="/user/login" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="/user/register" class="nav-link">Register</a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="mb-5"><%- body %></main>
     <footer class="bg-dark mt-auto text-center py-2">
       <span class="text-white">&copy;YelpCamp</span>
     </footer>

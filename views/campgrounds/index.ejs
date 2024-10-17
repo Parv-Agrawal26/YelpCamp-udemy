@@ -1,12 +1,21 @@
 <% layout('./layouts/boilerplate') %>
+<style>
+      body {
+        background-image: url("/images/camp2.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+    </style>
 <h1 class="text-center my-4">All Campgrounds</h1>
 <div class="container">
   <a href="/campgrounds/create" class="btn btn-primary mb-4">Create new Campground</a>
   <div class="row">
     <% campgrounds.forEach(element => { %>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img src="<%= element.image %>" class="card-img-top" alt="Campground image">
+      <div class="col-12 mb-4">
+        <div class="card d-flex flex-row">
+          <img src="<%= element.image %>" class="card-img-left" alt="Campground image" style="width: 200px; height: auto;">
           <div class="card-body">
             <h5 class="card-title"><%= element.title %></h5>
             <p class="card-text"><%= element.description %></p>
