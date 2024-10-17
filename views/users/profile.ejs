@@ -1,0 +1,63 @@
+<%- layout("./layouts/boilerplate") %>
+
+<div class="container  mt-5">
+  <h1 class="mb-3">Welcome, <%= user.name %>!</h1>
+  <h2 class="text-muted mb-4"><%= user.email %></h2>
+  <h1 class="mb-4 text-center">Update Details</h1>
+  
+  <form action="/user/profile/<%= user._id %>/update" method="post" class="mb-4 text-center">
+    
+    <div class="form-group row mb-3">
+      <label for="name" class="col-sm-3 col-form-label">Name:</label>
+      <div class="col-sm-6">
+        <input type="text" id="name" name="name" class="form-control" value="<%= user.name %>" placeholder="Enter Name" disabled>
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="email" class="col-sm-3 col-form-label">Email:</label>
+      <div class="col-sm-6">
+        <input type="text" id="email" name="email" class="form-control" value="<%= user.email %>" placeholder="Enter Email" disabled>
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="age" class="col-sm-3 col-form-label">Age:</label>
+      <div class="col-sm-6">
+        <input type="text" id="age" name="age" class="form-control" value="<%= user.age %>" placeholder="Enter Age">
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="nationality" class="col-sm-3 col-form-label">Nationality:</label>
+      <div class="col-sm-6">
+        <input type="text" id="nationality" name="nationality" class="form-control" value="<%= user.nationality %>" placeholder="Your Nationality">
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="state" class="col-sm-3 col-form-label">State:</label>
+      <div class="col-sm-6">
+        <input type="text" id="state" name="state" class="form-control" value="<%= user.state %>" placeholder="Your State">
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="city" class="col-sm-3 col-form-label">City:</label>
+      <div class="col-sm-6">
+        <input type="text" id="city" name="city" class="form-control" value="<%= user.city %>" placeholder="Your City">
+      </div>
+    </div>
+    
+    <div class="form-group row mb-3">
+      <label for="pincode" class="col-sm-3 col-form-label">Pincode:</label>
+      <div class="col-sm-6">
+        <input type="text" id="pincode" name="pincode" class="form-control" value="<%= user.pincode %>" placeholder="Enter Pincode">
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-success d-inline">Update Details</button>
+  </form>
+
+  <a href="/user/logout/<%= user._id %>" class="btn btn-danger btn-sm mb-5 float-start d-inline ">Logout</a>
+</div>

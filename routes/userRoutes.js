@@ -53,7 +53,13 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile/:userid", isLoggedIn, async (req, res) => {
   const user = await userModel.findById(req.params.userid);
-  res.render("profile", { user });
+  res.render("./users/profile", { user });
+});
+
+router.post("/profile/:userid/update", isLoggedIn, async (req, res) => {
+  const {age,nationality, state, city, pincode} = req.body
+  let user = await userModel.findByIdAndUpdate(req.params.userid,{age,nationality,state,city,pincode})
+  res.redirect(`/user/profile/${user._id}`);
 });
 
 router.get("/logout/:userid", isLoggedIn, (req, res) => {

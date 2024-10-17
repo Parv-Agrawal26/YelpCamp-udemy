@@ -6,10 +6,12 @@ const userRoutes = require("./routes/userRoutes")
 const isLoggedIn = require("./middlewares/isLoggedIn");
 const jwt = require("jsonwebtoken")
 
+
 require("dotenv").config();
 require("./config/mongoose-connect")
 const ejsMate = require("ejs-mate")
 const userModel = require("./models/userModel")
+
 
 const app = express()
 
@@ -46,4 +48,5 @@ app.get("/",async (req,res)=>{
         res.render("home")
     }
 })
+
 app.listen(3000)
