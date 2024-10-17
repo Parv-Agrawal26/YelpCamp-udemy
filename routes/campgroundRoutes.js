@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 const campgroundModel = require("../models/campgroundModel");
 const reviewModel = require("../models/reviewModel");
 const reviewRoutes = require("../routes/reviewRoutes");
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const isAuthor = require("../middlewares/isAuthor");
+
+const { cloudinary, storage } = require("../config/cloudinary");
+const multer = require("multer");
+const upload = multer({ storage});
+
 
 router.get("/", async (req, res) => {
   let campgrounds = await campgroundModel.find({}).populate("author");
@@ -30,7 +36,7 @@ router.get("/create", (req, res) => {
   res.render("./campgrounds/newCampground");
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create",upload.single('image'), async (req, res) => {
   let { title, location, price, image, description } = req.body;
   const token = req.cookies.token;
   const decoded = jwt.verify(token, process.env.JWT_KEY);
@@ -40,7 +46,7 @@ router.post("/create", async (req, res) => {
     location: location,
     price: price,
     description: description,
-    image: image,
+    image: req.file.path,
     author: user._id,
   });
   res.redirect("/campgrounds");
@@ -51,15 +57,19 @@ router.get("/edit/:id", isAuthor, async (req, res) => {
   res.render("./campgrounds/editCamp", { campground });
 });
 
-router.post("/edit/:id", isAuthor, async (req, res) => {
+router.post("/edit/:id", isAuthor,upload.single('image'), async (req, res) => {
   let { title, location, price, image, description } = req.body;
   await campgroundModel.findByIdAndUpdate(req.params.id, {
     title: title,
     location: location,
     price: price,
     description: description,
-    image: image,
   });
+  if(req.file){
+    await campgroundModel.findByIdAndUpdate(req.params.id, {
+      image: req.file.path,
+    });
+  }
   res.redirect("/campgrounds");
 });
 
