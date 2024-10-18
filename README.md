@@ -37,7 +37,7 @@ YelpCamp is a web application that allows users to view, create, and review camp
 
 ## Deployment
 
-YelpCamp is deployed and live on Render. You can access the application https://yelpcamp-udemy-vncp.onrender.com.
+YelpCamp is deployed and live on Render. You can access the application https://yelpcamp-parv.onrender.com/
 
 
 ## Contributing
