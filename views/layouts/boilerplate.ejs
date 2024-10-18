@@ -10,12 +10,19 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    
 
-    
+    <style>
+      body {
+        background-image: url("/images/campsbg.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        color: white;
+        background-attachment: fixed;
+      }
+    </style>
   </head>
   <body class="d-flex vh-100 flex-column">
-    <nav class="navbar navbar-expand-lg sticky-top <%= !logged ? 'navbar-dark' : 'bg-light' %>">
+    <nav class="navbar navbar-dark navbar-expand-lg">
       <div class="container-fluid">
         <a class="navbar-brand" href="/campgrounds">YelpCamp</a>
 
@@ -31,7 +38,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -44,13 +50,17 @@
                 >Create a New Camp</a
               >
             </li>
-            <li class="nav-item ">
+            <li class="nav-item">
               <a href="/user/profile/<%= logged._id %>" class="nav-link active"
                 >Your Profile</a
               >
             </li>
             <li class="nav-item">
-              <a href="/user/logout/:id" class="nav-link text-white active btn btn-danger">Logout</a>
+              <a
+                href="/user/logout/:id"
+                class="nav-link text-white active btn btn-danger"
+                >Logout</a
+              >
             </li>
             <% } else { %>
             <li class="nav-item">
@@ -65,9 +75,21 @@
       </div>
     </nav>
 
-    <main class="mb-5"><%- body %></main>
+    <main class="mb-5">
+      <style>
+        .bg-glass {
+          background-color: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(10px);
+          border-radius: 15px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+      </style>
+
+      <div class="<%= logged ? 'bg-glass mx-5 mt-5 p-4 rounded shadow-lg' : '' %>"><%- body %></div>
+    </main>
     <footer class="bg-dark mt-auto text-center py-2">
-      <span class="text-white">&copy;YelpCamp <-- By PARV AGRAWAL --></span>
+      <span class="text-white">&copy;YelpCamp</span><br />
+      <span class="text-white"> <-- By PARV AGRAWAL --></span>
     </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

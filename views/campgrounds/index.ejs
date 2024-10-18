@@ -1,50 +1,50 @@
 <% layout('./layouts/boilerplate') %>
 
-<!-- Map Section -->
-<div class="container my-4">
-  <h2 class="text-center">See camps around the world</h2>
-  <div id="map" style="height: 400px"></div>
-</div>
+  <!-- Map Section -->
+  <div class="container my-4">
+    <h2 class="text-center mb-3">Camps around the world</h2>
+    <div id="map" style="height: 400px"></div>
+  </div>
 
-<h1 class="text-center my-4">All Campgrounds</h1>
-<div class="container">
-  <a href="/campgrounds/create" class="btn btn-primary mb-4"
-    >Create new Campground</a
-  >
-  <div class="row">
-    <% campgrounds.forEach(element => { %>
-    <div
-      class="col-12 mb-4"
-      data-lat="<%= element.lat %>"
-      data-long="<%= element.long %>"
-      data-name="<%= element.title %>"
-      data-location="<%= element.location %>"
+  <div class="container">
+    <a href="/campgrounds/create" class="btn btn-primary mb-4"
+      >Create new Campground</a
     >
-      <div class="card d-flex flex-row">
-        <img
-          src="<%= element.image %>"
-          class="card-img-left"
-          alt="Campground image"
-          style="width: 200px; height: auto"
-        />
-        <div class="card-body">
-          <h5 class="card-title"><%= element.title %></h5>
-          <p class="card-text"><%= element.description %></p>
-          <p class="card-text">
-            <small class="text-muted"><%= element.location %></small>
-          </p>
-          <p class="card-text">
-            Camp made by <strong><%= element.author.name %></strong>
-          </p>
-          <a
-            href="<%= `/campgrounds/show/${element._id}` %>"
-            class="btn btn-info"
-            >View <%= element.title %></a
-          >
+    <div class="row">
+      <% campgrounds.forEach(element => { %>
+      <div
+        class="col-12 mb-4"
+        data-lat="<%= element.lat %>"
+        data-long="<%= element.long %>"
+        data-name="<%= element.title %>"
+        data-location="<%= element.location %>"
+      >
+        <div class="card d-flex flex-row">
+          <img
+            src="<%= element.image %>"
+            class="card-img-left"
+            alt="Campground image"
+            style="width: 200px; height: auto"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= element.title %></h5>
+            <p class="card-text"><%= element.description %></p>
+            <p class="card-text">
+              <small class="text-muted"><%= element.location %></small>
+            </p>
+            <p class="card-text">
+              Camp made by <strong><%= element.author.name %></strong>
+            </p>
+            <a
+              href="<%= `/campgrounds/show/${element._id}` %>"
+              class="btn btn-info"
+              >View <%= element.title %></a
+            >
+          </div>
         </div>
       </div>
+      <% }); %>
     </div>
-    <% }); %>
   </div>
 </div>
 
