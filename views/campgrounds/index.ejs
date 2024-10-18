@@ -2,7 +2,7 @@
 
 <!-- Map Section -->
 <div class="container my-4">
-  <h2 class="text-center">Campground Cluster</h2>
+  <h2 class="text-center">See camps around the world</h2>
   <div id="map" style="height: 400px"></div>
 </div>
 
@@ -18,7 +18,7 @@
       data-lat="<%= element.lat %>"
       data-long="<%= element.long %>"
       data-name="<%= element.title %>"
-      data-description="<%= element.description %>"
+      data-location="<%= element.location %>"
     >
       <div class="card d-flex flex-row">
         <img
@@ -65,8 +65,8 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
 <script>
-  // Initialize the map
-  const map = L.map("map").setView([20.5937, 78.9629], 3); // Center of India; adjust as needed
+  // Initialize the map centered on India
+  const map = L.map("map").setView([20.5937, 78.9629], 4);
 
   // Set up the OSM layer
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -81,16 +81,22 @@
 
   // Loop through each campground div and create markers
   campgroundDivs.forEach((div) => {
-    const latitude = div.dataset.lat;
-    const longitude = div.dataset.long;
-    const name = div.dataset.name;
-    const description = div.dataset.description;
+    const latitude = parseFloat(div.dataset.lat);
+    const longitude = parseFloat(div.dataset.long);
+    const name = div.dataset.name || "Unknown Campground";
+    const location = div.dataset.location || "No description available.";
 
-    const marker = L.marker([latitude, longitude]).bindPopup(
-      `<strong>${name}</strong><br>${description}`
-    );
+    // Ensure lat/lng is valid
+    if (!isNaN(latitude) && !isNaN(longitude)) {
+      const marker = L.marker([latitude, longitude]).bindPopup(
+        `<strong>${name}</strong><br>${location}`
+      );
 
-    markers.addLayer(marker);
+      // Add marker to the cluster group
+      markers.addLayer(marker);
+    } else {
+      console.error("Invalid latitude or longitude for: ", name);
+    }
   });
 
   // Add the marker cluster group to the map

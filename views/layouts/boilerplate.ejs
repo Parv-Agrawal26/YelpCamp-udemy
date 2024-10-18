@@ -11,13 +11,14 @@
       crossorigin="anonymous"
     />
     
+
+    
   </head>
   <body class="d-flex vh-100 flex-column">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+    <nav class="navbar navbar-expand-lg sticky-top <%= !logged ? 'navbar-dark' : 'bg-light' %>">
       <div class="container-fluid">
         <a class="navbar-brand" href="/campgrounds">YelpCamp</a>
 
-        <!-- Toggle button for smaller screens -->
         <button
           class="navbar-toggler"
           type="button"
@@ -30,33 +31,33 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navbar links -->
+
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a href="/" class="nav-link">Home</a>
+              <a href="/" class="nav-link active">Home</a>
             </li>
 
             <% if(logged) { %>
             <li class="nav-item">
-              <a href="/campgrounds/create" class="nav-link"
+              <a href="/campgrounds/create" class="nav-link active"
                 >Create a New Camp</a
               >
             </li>
-            <li class="nav-item">
-              <a href="/user/profile/<%= logged._id %>" class="nav-link"
+            <li class="nav-item ">
+              <a href="/user/profile/<%= logged._id %>" class="nav-link active"
                 >Your Profile</a
               >
             </li>
             <li class="nav-item">
-              <a href="/user/logout/:id" class="nav-link text-danger">Logout</a>
+              <a href="/user/logout/:id" class="nav-link text-white active btn btn-danger">Logout</a>
             </li>
             <% } else { %>
             <li class="nav-item">
-              <a href="/user/login" class="nav-link">Login</a>
+              <a href="/user/login" class="nav-link active">Login</a>
             </li>
             <li class="nav-item">
-              <a href="/user/register" class="nav-link">Register</a>
+              <a href="/user/register" class="nav-link active">Register</a>
             </li>
             <% } %>
           </ul>
@@ -66,7 +67,7 @@
 
     <main class="mb-5"><%- body %></main>
     <footer class="bg-dark mt-auto text-center py-2">
-      <span class="text-white">&copy;YelpCamp</span>
+      <span class="text-white">&copy;YelpCamp <-- By PARV AGRAWAL --></span>
     </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
